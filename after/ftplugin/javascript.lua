@@ -1,3 +1,4 @@
+local u = require("functions.utils")
 local map_opts = { noremap = true, silent = true, nowait = true, buffer = true }
 
 -- vim-test mappings
@@ -23,7 +24,7 @@ end, map_opts)
 vim.keymap.set("n", "<localleader>(", function()
 	vim.cmd("startinsert")
 	vim.api.nvim_feedkeys(
-		vim.api.nvim_replace_termcodes("() => {}<left><CR><CR><up><tab>", false, true, true),
+		u.rtc("() => {}<left><CR><CR><up><tab>", false),
 		"n",
 		false
 	)
@@ -32,7 +33,7 @@ end, map_opts)
 vim.keymap.set("n", "<localleader>)", function()
 	vim.cmd("startinsert")
 	vim.api.nvim_feedkeys(
-		vim.api.nvim_replace_termcodes("() => {}<left><CR><CR><up><up><right>", false, true, true),
+		u.rtc("() => {}<left><CR><CR><up><up><right>", false),
 		"n",
 		false
 	)
@@ -40,7 +41,7 @@ end, map_opts)
 
 vim.keymap.set("n", "<localleader>m", function()
 	vim.api.nvim_feedkeys(
-		vim.api.nvim_replace_termcodes("a.map(() => {})<left><left><CR><CR><up><up><ESC>Ei", false, true, true),
+		u.rtc("a.map(() => {})<left><left><CR><CR><up><up><ESC>Ei", false),
 		"n",
 		false
 	)
@@ -48,7 +49,7 @@ end, map_opts)
 
 vim.keymap.set("n", "<localleader>f", function()
 	vim.api.nvim_feedkeys(
-		vim.api.nvim_replace_termcodes("a.filter(() => {})<left><left><CR><CR><up><up><ESC>Ei", false, true, true),
+		u.rtc("a.filter(() => {})<left><left><CR><CR><up><up><ESC>Ei", false),
 		"n",
 		false
 	)
@@ -56,7 +57,7 @@ end, map_opts)
 
 vim.keymap.set("n", "<localleader>r", function()
 	vim.api.nvim_feedkeys(
-		vim.api.nvim_replace_termcodes("a.reduce((acc, ) => {})<left><left><CR><CR><up><up><ESC>EEi", false, true, true),
+		u.rtc("a.reduce((acc, ) => {})<left><left><CR><CR><up><up><ESC>EEi", false),
 		"n",
 		false
 	)

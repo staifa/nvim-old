@@ -1,9 +1,8 @@
 -- Luafile
 vim.keymap.set('n', '<leader>lf', ':luafile %<CR>')
 
--- Enter crates new line
+-- Shift + Enter crates new line
 vim.keymap.set('n', '<S-Enter>', ' O<Esc>')
-vim.keymap.set('n', '<CR>', ' o<Esc>')
 
 -- Buffer navigation
 vim.keymap.set('n', 'gn', ':bn<cr>')

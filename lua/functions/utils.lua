@@ -8,8 +8,8 @@ local function td_validate(fn, ms)
 		fn = { fn, "f" },
 		ms = {
 			ms,
-			function(ms)
-				return type(ms) == "number" and ms > 0
+			function(m)
+				return type(m) == "number" and m > 0
 			end,
 			"number > 0",
 		},
@@ -17,6 +17,12 @@ local function td_validate(fn, ms)
 end
 
 return {
+	rtc = function(str, from_part, do_lt, special)
+		from_part = from_part or true
+		do_lt = do_lt or true
+		special = special or true
+		return vim.api.nvim_replace_termcodes(str, from_part, do_lt, special)
+	end,
 	get_os = function()
 		return vim.loop.os_uname().sysname
 	end,
