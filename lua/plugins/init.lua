@@ -90,6 +90,7 @@ require('packer').startup(function()
   use 'alvan/vim-closetag'
   use 'RRethy/vim-illuminate'
   use { 'numToStr/Comment.nvim', config = no_setup('Comment') }
+  use { 'tversteeg/registers.nvim', config = no_setup('registers') }
   use 'wellle/targets.vim'
   use 'justinmk/vim-sneak'
   use { 'kevinhwang91/nvim-bqf', ft = { 'qf' } }
