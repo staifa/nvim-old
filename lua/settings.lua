@@ -47,8 +47,10 @@ vim.g.matchup_matchparen_offscreen = { method = 'popup' }
 
 -- zprint
 vim.g["zprint#make_autocmd"] = 0
+local zptgroup = vim.api.nvim_create_augroup("ZprintTweaks", {})
 vim.api.nvim_create_autocmd("BufLeave", {
   pattern = {"*.clj", "*.cljs", "*.cljc"},
+  group = zptgroup,
   callback = function()
     local bufname = vim.api.nvim_buf_get_name(0)
     -- disable in conjure log
@@ -65,7 +67,10 @@ vim.api.nvim_create_autocmd("BufLeave", {
   end,
   desc = "Runs Zprint when leaving buffer",
 })
+
+local blgroup = vim.api.nvim_create_augroup("EOFBlankLines", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
+  group = blgroup,
   callback = function()
     vim.cmd([[v/\_s*\S/d]])
   end,

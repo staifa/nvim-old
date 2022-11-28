@@ -38,25 +38,26 @@ local git_mr_open = function()
   end
 end
 
-local fgroup = vim.api.nvim_create_augroup("FugitiveBufferCleanup", {})
+local fcgroup = vim.api.nvim_create_augroup("FugitiveBufferCleanup", {})
 vim.api.nvim_create_autocmd("BufUnload", {
+  -- only on main fugitive window 
   pattern = "*fugitive://*/.git//",
-  group = fgroup,
+  group = fcgroup,
   callback = function()
-    local current_bufname = vim.api.nvim_buf_get_name(0)
+    local bufnr = vim.fn.bufnr()
     for _, buf in pairs(vim.fn.getbufinfo({bufloaded = 1})) do
-      if buf.name:match(".*fugitive://.*") and buf.name ~= current_bufname then
-        vim.api.nvim_input(":bd " .. buf.name .. "<CR>")
+      if buf.name:match(".*fugitive://.*") and buf.bufnr ~= bufnr then
+        vim.api.nvim_command("bd " .. buf.bufnr)
       end
     end
   end,
-  desc = "Close all fugitive buffers when closing the main buffer",
+  desc = "Close all fugitive buffers when closing the main fugitive window",
 })
 
-vim.keymap.set("n", "<localleader>gs", toggle_status, {})
-vim.keymap.set("n", "<leader>gP", git_push, {})
-vim.keymap.set("n", "<leader>goo", git_open, {})
-vim.keymap.set("n", "<leader>gom", git_mr_open, {})
+vim.keymap.set("n", "<leader>gg", toggle_status, {})
+vim.keymap.set("n", "<localleader>gP", git_push, {})
+vim.keymap.set("n", "<localleader>goo", git_open, {})
+vim.keymap.set("n", "<localleader>gom", git_mr_open, {})
 vim.keymap.set('n', '<localleader>gw', ':Gwrite<CR>')
 vim.keymap.set('n', '<localleader>ge', ':Gedit<CR>')
 vim.keymap.set('n', '<localleader>gc', ':Git commit<CR>')
