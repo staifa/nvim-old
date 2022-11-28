@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("BufUnload", {
     local bufnr = vim.fn.bufnr()
     for _, buf in pairs(vim.fn.getbufinfo({bufloaded = 1})) do
       if buf.name:match(".*fugitive://.*") and buf.bufnr ~= bufnr then
-        vim.api.nvim_command("bd " .. buf.bufnr)
+        vim.cmd("bd " .. buf.bufnr)
       end
     end
   end,
@@ -38,5 +38,6 @@ vim.api.nvim_create_autocmd("BufUnload", {
 vim.keymap.set("n", "<leader>gg", toggle_status, {})
 vim.keymap.set("n", "<leader>gP", git_push, {})
 vim.keymap.set("n", "<leader>gF", function() git_push({force = 1}) end, {})
+vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>')
 vim.keymap.set('n', '<leader>gw', ':Gwrite<CR>')
 vim.keymap.set('n', '<leader>gC', ':G checkout ')

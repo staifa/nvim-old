@@ -1,30 +1,30 @@
 -- Utility settings loader
 local setup = function(mod, remote)
-	if remote == nil then
-		-- If plugin does not need "require" setup, then just set it up.
-		require(mod)
-	else
-		local status = pcall(require, remote)
-		if not status then
-			print(remote .. " is not downloaded.")
-			return
-		else
-			local local_config = require(mod)
-			if type(local_config) == "table" then
-				local_config.setup()
-			end
-		end
-	end
+  if remote == nil then
+    -- If plugin does not need "require" setup, then just set it up.
+    require(mod)
+  else
+    local status = pcall(require, remote)
+    if not status then
+      print(remote .. " is not downloaded.")
+      return
+    else
+      local local_config = require(mod)
+      if type(local_config) == "table" then
+        local_config.setup()
+      end
+    end
+  end
 end
 
 local no_setup = function(mod)
-	local status = pcall(require, mod)
-	if not status then
-		print(mod .. " is not downloaded.")
-		return
-	else
-		require(mod).setup({})
-	end
+  local status = pcall(require, mod)
+  if not status then
+    print(mod .. " is not downloaded.")
+    return
+  else
+    require(mod).setup({})
+  end
 end
 
 local use = require('packer').use
@@ -47,11 +47,11 @@ require('packer').startup(function()
   }
   use {
          'alvarosevilla95/luatab.nvim',
-	 config = setup('plugins/luatab', 'luatab'),
-	 requires = 'kyazdani42/nvim-web-devicons',
+   config = setup('plugins/luatab', 'luatab'),
+   requires = 'kyazdani42/nvim-web-devicons',
   }
   use { 'tpope/vim-fugitive', config = setup('plugins.fugitive') }
-  -- use { 'numToStr/FTerm.nvim', config = setup('plugins.fterm', 'FTerm') }
+  use { 'lewis6991/gitsigns.nvim', no_setup('gitsigns') }
   use { 'kyazdani42/nvim-web-devicons', no_setup('nvim-web-devicons') }
   use { 'kyazdani42/nvim-tree.lua', config = setup('plugins.nvim_tree', 'nvim-tree') }
   use { 'karb94/neoscroll.nvim', config = setup('plugins.neoscroll', 'neoscroll') }
@@ -90,7 +90,6 @@ require('packer').startup(function()
   use 'alvan/vim-closetag'
   use 'RRethy/vim-illuminate'
   use { 'numToStr/Comment.nvim', config = no_setup('Comment') }
-  -- use { 'phaazon/hop.nvim', config = no_setup('hop') }
   use 'wellle/targets.vim'
   use 'justinmk/vim-sneak'
   use { 'kevinhwang91/nvim-bqf', ft = { 'qf' } }
@@ -100,23 +99,11 @@ require('packer').startup(function()
   use 'ThePrimeagen/vim-be-good'
   use 'SirVer/ultisnips'
   use {
-	'quangnguyen30192/cmp-nvim-ultisnips',
-	config = setup('plugins.ultisnips'),
+    'quangnguyen30192/cmp-nvim-ultisnips',
+    config = setup('plugins.ultisnips'),
   }
   use { 'simnalamburt/vim-mundo', config = setup('plugins.mundo') }
   use 'Pocco81/auto-save.nvim'
- --  use {
-	-- "folke/noice.nvim",
-	-- event = "VimEnter",
-	-- config = function()
-	--   require("noice").setup()
-	-- end,
-	-- requires = {
-	-- -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-	-- "MunifTanjim/nui.nvim",
-	-- "rcarriga/nvim-notify",
- --        }
- --  }
   -- cmp
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
