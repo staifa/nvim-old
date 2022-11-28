@@ -1,40 +1,21 @@
-local u = require("functions.utils")
-
 local toggle_status = function()
   local ft = vim.bo.filetype
   if ft == "fugitive" then
-    vim.api.nvim_command("bd")
+    vim.cmd("bd")
   else
-    vim.api.nvim_command("Git")
+    vim.cmd("Git")
   end
 end
 
-local git_push = function()
-  local isSubmodule = vim.fn.trim(vim.fn.system("git rev-parse --show-superproject-working-tree"))
-  if isSubmodule == "" then
-    if u.get_os() == "Linux" then
-      vim.api.nvim_command("Git push")
-    else
-      vim.api.nvim_command("! git push")
-    end
+local git_push = function(opts)
+  opts = opts or {}
+  local head = vim.call("FugitiveHead")
+  if opts.force then
+    vim.fn.confirm("Force push to origin/" .. head .. " branch?")
+    vim.cmd("G push origin " .. head .. " -f")
   else
-    vim.fn.confirm("Push to origin/main branch for submodule?")
-    vim.api.nvim_command("! git push origin HEAD:main")
-  end
-end
-
-local git_open = function()
-  vim.api.nvim_command("! git open")
-end
-
-local git_mr_open = function()
-  if u.get_os() == "Linux" then
-    os.execute(
-      string.format(
-        "firefox --new-tab 'https://gitlab.com/crossbeam/%s/-/merge_requests?scope=all&state=opened&author_username=frantisek.stainer'",
-        u.current_dir()
-      )
-    )
+    vim.fn.confirm("Push to origin/" .. head .. " branch?")
+    vim.cmd("G push origin " .. head)
   end
 end
 
@@ -55,10 +36,7 @@ vim.api.nvim_create_autocmd("BufUnload", {
 })
 
 vim.keymap.set("n", "<leader>gg", toggle_status, {})
-vim.keymap.set("n", "<localleader>gP", git_push, {})
-vim.keymap.set("n", "<localleader>goo", git_open, {})
-vim.keymap.set("n", "<localleader>gom", git_mr_open, {})
-vim.keymap.set('n', '<localleader>gw', ':Gwrite<CR>')
-vim.keymap.set('n', '<localleader>ge', ':Gedit<CR>')
-vim.keymap.set('n', '<localleader>gc', ':Git commit<CR>')
-vim.keymap.set('n', '<localleader>gC', ':Git checkout')
+vim.keymap.set("n", "<leader>gP", git_push, {})
+vim.keymap.set("n", "<leader>gF", function() git_push({force = 1}) end, {})
+vim.keymap.set('n', '<leader>gw', ':Gwrite<CR>')
+vim.keymap.set('n', '<leader>gC', ':G checkout ')

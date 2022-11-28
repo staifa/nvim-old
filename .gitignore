@@ -1,3 +1,5 @@
 .undo
 .vim
+.clj-kondo
+.lsp
 plugin/packer_compiled.lua
