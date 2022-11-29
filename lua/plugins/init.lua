@@ -64,7 +64,7 @@ require('packer').startup(function()
   use { 'p00f/nvim-ts-rainbow', requires = 'nvim-treesitter/nvim-treesitter' }
   use 'ncm2/float-preview.nvim'
   use 'bakpakin/fennel.vim'
-  use 'bfontaine/zprint.vim'
+  use { 'bfontaine/zprint.vim', config = setup('plugins.zprint') }
   use 'chase/vim-ansible-yaml'
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {

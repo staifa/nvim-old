@@ -44,35 +44,3 @@ vim.opt.expandtab = true
 vim.g.Illuminate_ftblacklist = {'NvimTree'}
 vim.g.closetag_filenames = '*.html,*.jsx,*.js,*.tsx,*.vue'
 vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-
--- zprint
-vim.g["zprint#make_autocmd"] = 0
-local zptgroup = vim.api.nvim_create_augroup("ZprintTweaks", {})
-vim.api.nvim_create_autocmd("BufLeave", {
-  pattern = {"*.clj", "*.cljs", "*.cljc"},
-  group = zptgroup,
-  callback = function()
-    local bufname = vim.api.nvim_buf_get_name(0)
-    -- disable in conjure log
-    if bufname:match(".*conjure%-log.*") then
-      return
-    end
-    -- disable when working with fugitive
-    for _, buf in pairs(vim.fn.getbufinfo({bufloaded = 1})) do
-      if buf.name:match(".*fugitive://.*") then
-        return
-      end
-    end
-    vim.cmd("Zprint")
-  end,
-  desc = "Runs Zprint when leaving buffer",
-})
-
-local blgroup = vim.api.nvim_create_augroup("EOFBlankLines", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = blgroup,
-  callback = function()
-    vim.cmd([[v/\_s*\S/d]])
-  end,
-  desc = "Remove blank lines at EOF",
-})
