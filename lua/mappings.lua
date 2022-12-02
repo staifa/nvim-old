@@ -1,9 +1,6 @@
 -- Luafile
 vim.keymap.set('n', '<leader>lf', ':luafile %<CR>')
 
--- Shift + Enter crates new line
-vim.keymap.set('n', '<S-Enter>', ' O<Esc>')
-
 -- Buffer navigation
 vim.keymap.set('n', 'gn', ':bn<cr>')
 vim.keymap.set('n', 'gp', ':bp<cr>')
@@ -27,7 +24,6 @@ vim.keymap.set('n', 't', '<Plug>Sneak_t')
 vim.keymap.set('n', 'T', '<Plug>Sneak_T')
 
 -- Space works in normal mode
-vim.keymap.set('n', '<space>', ':s!^! !<CR>')
 vim.keymap.set('n', '<Space>', 'i<Space><Esc>')
 
 -- clear highlights

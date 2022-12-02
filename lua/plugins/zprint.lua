@@ -19,7 +19,10 @@ vim.api.nvim_create_autocmd("BufLeave", {
         return
       end
     end
+		-- formatting messes the rainbow colors
+		vim.cmd("TSDisable rainbow")
     vim.cmd("Zprint")
+		vim.cmd("TSEnable rainbow")
   end,
   desc = "Runs Zprint when leaving buffer",
 })
