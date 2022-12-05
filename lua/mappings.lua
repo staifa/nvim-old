@@ -2,18 +2,13 @@
 vim.keymap.set('n', '<leader>lf', ':luafile %<CR>')
 
 -- Buffer navigation
-vim.keymap.set('n', 'gn', ':bn<cr>')
-vim.keymap.set('n', 'gp', ':bp<cr>')
-vim.keymap.set('n', 'gx', ':BD<cr>')
-vim.keymap.set('n', 'gX', ':bd<cr>')
+vim.keymap.set('n', 'gn', ':bn<CR>')
+vim.keymap.set('n', 'gp', ':bp<CR>')
+vim.keymap.set('n', 'gx', ':BD<CR>')
+vim.keymap.set('n', 'gX', ':bd<CR>')
 
 -- New tab
 vim.keymap.set('n', '<C-n>', ':tabnew<CR>')
-
--- Hop bindings
--- vim.keymap.set('n', 'hh', ':HopWord<cr>')
--- vim.keymap.set('n', 'hl', ':HopLineStart<cr>')
--- vim.keymap.set('n', 'hp', ':HopPattern<cr>')
 
 -- Sneak bindings
 vim.keymap.set('n', 's', '<Plug>Sneak_s')

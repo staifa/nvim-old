@@ -55,6 +55,16 @@ require('packer').startup(function()
     run = 'cargo build --release',
     config = setup('plugins.parinfer'),
   }
+  -- motion
+  use 'justinmk/vim-sneak'
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    config = setup('plugins.hop'),
+  }
+  -- git
+  use { 'tpope/vim-fugitive', config = setup('plugins.fugitive') }
+  use { 'lewis6991/gitsigns.nvim', no_setup('gitsigns') }
   -- misc
   use 'qpkorr/vim-bufkill'
   use { 'ellisonleao/gruvbox.nvim', config = setup('plugins/gruvbox') }
@@ -64,7 +74,7 @@ require('packer').startup(function()
   use 'tpope/vim-sleuth'
   use {
     'nvim-lualine/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = setup('plugins.lualine', 'lualine'),
   }
   use {
@@ -72,8 +82,6 @@ require('packer').startup(function()
     config = setup('plugins/luatab', 'luatab'),
     requires = 'kyazdani42/nvim-web-devicons',
   }
-  use { 'tpope/vim-fugitive', config = setup('plugins.fugitive') }
-  use { 'lewis6991/gitsigns.nvim', no_setup('gitsigns') }
   use { 'kyazdani42/nvim-web-devicons', no_setup('nvim-web-devicons') }
   use { 'kyazdani42/nvim-tree.lua', config = setup('plugins.nvim_tree', 'nvim-tree') }
   use { 'karb94/neoscroll.nvim', config = setup('plugins.neoscroll', 'neoscroll') }
@@ -82,7 +90,7 @@ require('packer').startup(function()
     run = ':TSUpdate',
     config = setup('plugins.treesitter', 'nvim-treesitter'),
   }
-  use { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' }
+  -- use { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' }
   use { 'p00f/nvim-ts-rainbow', requires = 'nvim-treesitter/nvim-treesitter' }
   use 'ncm2/float-preview.nvim'
   use 'bakpakin/fennel.vim'
@@ -112,17 +120,11 @@ require('packer').startup(function()
   use { 'numToStr/Comment.nvim', no_setup('Comment') }
   use { 'tversteeg/registers.nvim', no_setup('registers') }
   use 'wellle/targets.vim'
-  use 'justinmk/vim-sneak'
   use { 'kevinhwang91/nvim-bqf', ft = { 'qf' } }
-  use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
+  -- use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
   use { 'posva/vim-vue', ft = { 'vue' } }
   use 'andymass/vim-matchup'
   use 'ThePrimeagen/vim-be-good'
-  use 'SirVer/ultisnips'
-  use {
-    'quangnguyen30192/cmp-nvim-ultisnips',
-    config = setup('plugins.ultisnips'),
-  }
   use { 'simnalamburt/vim-mundo', config = setup('plugins.mundo') }
-  use 'Pocco81/auto-save.nvim'
+  use { 'Pocco81/auto-save.nvim', no_setup('auto-save') }
 end)

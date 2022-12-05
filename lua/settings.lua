@@ -40,7 +40,13 @@ vim.opt.cindent = true
 vim.opt.tabstop = 2
 vim.opt.expandtab = true
 
+-- performance tweaks
+vim.g.loaded_matchparen = 1
+vim.opt.lazyredraw = true -- don't redraw everytime
+vim.opt.synmaxcol = 128 -- avoid slow rendering for long lines
+vim.g.vimsyn_minlines = 64
+
 -- Plugins
-vim.g.Illuminate_ftblacklist = {'NvimTree'}
+vim.g.Illuminate_ftblacklist = { 'NvimTree' }
 vim.g.closetag_filenames = '*.html,*.jsx,*.js,*.tsx,*.vue'
 vim.g.matchup_matchparen_offscreen = { method = 'popup' }

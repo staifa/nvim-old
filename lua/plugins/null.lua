@@ -27,7 +27,7 @@ null_ls.setup({
 	on_attach = function(client, bufnr)
 		if client.server_capabilities.documentFormattingProvider then
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
+			vim.api.nvim_create_autocmd("BufWritePost", {
 				group = augroup,
 				buffer = bufnr,
 				-- on 0.8, you should use vim.lsp.buf.format instead
