@@ -33,9 +33,12 @@ require('packer').startup(function()
   use { 'lewis6991/impatient.nvim', config = [[require('impatient')]] }
   use 'wbthomason/packer.nvim'
   -- LSP
-  use 'neovim/nvim-lspconfig'
+  use { 'williamboman/mason.nvim',
+    run = ':MasonUpdate',
+    no_setup('mason'),
+  }
   use 'williamboman/mason-lspconfig.nvim'
-  use { 'williamboman/mason.nvim', no_setup('mason') }
+  use 'neovim/nvim-lspconfig'
   use 'lukas-reineke/lsp-format.nvim'
   use 'onsails/lspkind-nvim'
   use { 'jose-elias-alvarez/null-ls.nvim', config = setup('plugins.null', 'null-ls') }
@@ -125,6 +128,6 @@ require('packer').startup(function()
   use { 'posva/vim-vue', ft = { 'vue' } }
   use 'andymass/vim-matchup'
   use 'ThePrimeagen/vim-be-good'
-  use { 'simnalamburt/vim-mundo', config = setup('plugins.mundo') }
+  use 'simnalamburt/vim-mundo'
   use { 'Pocco81/auto-save.nvim', no_setup('auto-save') }
 end)

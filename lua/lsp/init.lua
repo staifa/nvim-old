@@ -1,12 +1,7 @@
-local cmp_nvim_lsp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-local mason_status_ok, _ = pcall(require, "mason")
-local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-local lsp_format_ok, lsp_format = pcall(require, "lsp-format")
-
-if not (mason_status_ok and mason_lspconfig_ok and cmp_nvim_lsp_status_ok and lsp_format_ok) then
-	print("Mason, Mason LSP Config, Completion, or LSP Format not installed!")
-	return
-end
+require("mason").setup()
+local mason_lspconfig = require("mason-lspconfig")
+local lsp_format = require("lsp-format")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 lsp_format.setup({
 	order = {
@@ -33,8 +28,9 @@ local on_attach = function(client, bufnr)
 	-- Formatting for Clojure handled by custom ZPrint function, see lua/lsp/servers/clojure-lsp.lua
 	if (client.name ~= "volar"
 			and client.name ~= "tsserver"
-			and client.name ~= "clojure_lsp"
-			and client.name ~= "sumneko_lua") then
+			-- and client.name ~= "clojure_lsp"
+			-- and client.name ~= "groovyls"
+			and client.name ~= "lua_ls") then
 		lsp_format.on_attach(client)
 	end
 
@@ -76,12 +72,13 @@ local capabilities = cmp_nvim_lsp.default_capabilities(normal_capabilities)
 -- configuration files, which are stored in lua/lsp/servers,
 -- passing along the global on_attach and capabilities functions
 local servers = {
-	"sumneko_lua",
+	"lua_ls",
 	"clojure_lsp",
-	"tailwindcss",
-	"tsserver",
-	"eslint",
-	"volar",
+	-- "tailwindcss",
+	-- "tsserver",
+	-- "eslint",
+	-- "volar",
+	-- "groovyls",
 }
 
 -- Setup Mason + LSPs + CMP
@@ -129,5 +126,5 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
 	vim.lsp.handlers.signature_help, {
-	border = "solid",
-})
+		border = "solid",
+	})

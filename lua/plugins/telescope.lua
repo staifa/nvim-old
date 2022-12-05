@@ -43,7 +43,7 @@ local function buffers()
 end
 
 local function oldfiles()
-builtin.oldfiles()
+	builtin.oldfiles()
 end
 
 local function git_commits()
@@ -263,9 +263,9 @@ vim.keymap.set("n", "<leader>s", workspace_symbols, {})
 vim.keymap.set("n", "<leader>d", diagnostics, {})
 vim.keymap.set("n", "<leader>tr", oldfiles, {})
 vim.keymap.set("n", "<leader>gc", git_commits, {})
-vim.keymap.set("n", "<leader>b", git_branches, {})
+vim.keymap.set("n", "<leader>bz", git_branches, {})
 vim.keymap.set("n", "<leader>tF", grep_string, {})
 vim.keymap.set("n", "<leader>tf", git_files_string, {})
 vim.keymap.set("v", "<leader>tf", git_files_string_visual, {})
 vim.keymap.set("v", "<leader>tF", grep_string_visual, {})
-vim.keymap.set("n", "<leader>gs", stash_filter, {})
+vim.keymap.set("n", "<leader>gf", stash_filter, {})

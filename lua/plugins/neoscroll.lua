@@ -1,7 +1,3 @@
-local t = {}
-t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "200" } }
-t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "200" } }
-
 require("neoscroll").setup({
 	mappings = {},
 	hide_cursor = true, -- Hide cursor while scrolling
@@ -14,4 +10,3 @@ require("neoscroll").setup({
 	post_hook = nil, -- Function to run after the scrolling animation ends
 	performance_mode = false, -- Disable "Performance Mode" on all buffers.
 })
-require("neoscroll.config").set_mappings(t)
